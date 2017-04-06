@@ -42,13 +42,7 @@ const routes = {
         el: requestJSON.comment
       };
       request
-        .post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`)
-        .then(function () {
-          console.log('great success!');
-        })
-        .catch(function () {
-          console.log(':(');
-        });
+        .post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`);
       res.sendStatus(200);
     });
   }

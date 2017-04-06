@@ -36,7 +36,7 @@ const routes = {
       let analyticsEventQuery = {
         v: 1,
         tid: 'UA-41256563-1',
-        uid: 'beanstalk'
+        uid: 'beanstalk',
         t: 'event',
         ec: 'development',
         ea: 'deployment',

@@ -36,13 +36,15 @@ const routes = {
       let analyticsEventQuery = {
         v: 1,
         tid: 'UA-41256563-1',
+        cid: 'beanstalk'
         t: 'event',
         ec: 'development',
         ea: 'deployment',
         el: requestJSON.comment
       };
-      request
-        .post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`);
+      let url = `https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`;
+      console.log(url);
+      request.post(url);
       res.sendStatus(200);
     });
   }

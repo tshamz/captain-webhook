@@ -8,7 +8,7 @@ const routes = {
   },
   pre: function (req, res) {
     console.log('Incoming Pre Deploy Webhook Request');
-    console.log(req);
+    console.log(res);
     res.sendStatus(200);
   },
   post: function (req, res) {

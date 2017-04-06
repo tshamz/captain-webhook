@@ -20,7 +20,7 @@ const routes = {
 
     req.on('end', function () {
       console.log(JSON.parse(jsonString));
-      res.sendStatus(404);
+      res.sendStatus(200);
     });
   },
   post: function (req, res) {
@@ -41,7 +41,14 @@ const routes = {
         ea: 'deployment',
         el: requestJSON.comment
       };
-      request.post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`);
+      request
+        .post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`)
+        .then(function () {
+          console.log('great success!');
+        })
+        .catch(function () {
+          console.log(':(');
+        });
       res.sendStatus(200);
     });
   }

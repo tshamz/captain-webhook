@@ -12,14 +12,13 @@ const routes = {
     var jsonString = '';
 
     req.on('data', function (data) {
-       jsonString += data;
+      jsonString += data;
     });
 
     req.on('end', function () {
-       console.log(JSON.parse(jsonString));
-       console.log(req.body);
+      console.log(JSON.parse(jsonString));
+      res.sendStatus(200);
     });
-    res.sendStatus(200);
   },
   post: function (req, res) {
     console.log('Incoming Post Deploy Webhook Request');
@@ -27,15 +26,13 @@ const routes = {
     var jsonString = '';
 
     req.on('data', function (data) {
-       jsonString += data;
+      jsonString += data;
     });
 
     req.on('end', function () {
-       console.log(JSON.parse(jsonString));
-       console.log(req.body);
+      console.log(JSON.parse(jsonString));
+      res.sendStatus(200);
     });
-
-    res.sendStatus(200);
   }
 };
 

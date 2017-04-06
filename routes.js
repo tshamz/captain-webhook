@@ -2,8 +2,8 @@
 
 const routes = {
   index: function (req, res) {
-    console.log(req);
-    res.send(200);
+    console.log(req.body);
+    res.sendStatus(200);
   }
 };
 

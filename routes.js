@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const UsageStats = require('usage-stats')
 const querystring = require('querystring');
 
 const routes = {
@@ -26,6 +27,10 @@ const routes = {
   post: function (req, res) {
     console.log('Incoming Post Deploy Webhook Request');
 
+    const usageStats = new UsageStats('UA-41256563-1', {
+      an: 'beanstalk-deployments'
+    });
+
     let requestData = '';
     req.on('data', function (data) {
       requestData += data;
@@ -33,18 +38,8 @@ const routes = {
 
     req.on('end', function () {
       let requestJSON = JSON.parse(requestData);
-      let analyticsEventQuery = {
-        v: 1,
-        tid: 'UA-41256563-1',
-        uid: 'beanstalk',
-        t: 'event',
-        ec: 'development',
-        ea: 'deployment',
-        el: requestJSON.comment
-      };
-      let url = `https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`;
-      console.log(url);
-      request.post(url);
+      usageStats.event('development', 'deployment', {el: requestJSON.comment})
+      usageStats.send();
       res.sendStatus(200);
     });
   }

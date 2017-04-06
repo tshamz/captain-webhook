@@ -1,5 +1,8 @@
 'use strict';
 
+const request = require('request');
+const querystring = require('querystring');
+
 const routes = {
   index: function (req, res) {
     console.log('Incoming Webhook Request');
@@ -23,14 +26,22 @@ const routes = {
   post: function (req, res) {
     console.log('Incoming Post Deploy Webhook Request');
 
-    var jsonString = '';
-
+    let requestData = '';
     req.on('data', function (data) {
-      jsonString += data;
+      requestData += data;
     });
 
     req.on('end', function () {
-      console.log(JSON.parse(jsonString));
+      let requestJSON = JSON.parse(jsonString);
+      let analyticsEventQuery = {
+        v: 1,
+        tid: 'UA-41256563-1',
+        t: 'event',
+        ec: 'development',
+        ea: 'deployment',
+        el: requestJSON.comment
+      };
+      request.post(`https://www.google-analytics.com/collect?${querystring.stringify(analyticsEventQuery)}`);
       res.sendStatus(200);
     });
   }

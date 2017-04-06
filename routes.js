@@ -12,14 +12,14 @@ const routes = {
   pre: function (req, res) {
     console.log('Incoming Pre Deploy Webhook Request');
 
-    var jsonString = '';
+    var requestData = '';
 
     req.on('data', function (data) {
-      jsonString += data;
+      requestData += data;
     });
 
     req.on('end', function () {
-      console.log(JSON.parse(jsonString));
+      console.log(JSON.parse(requestData));
       res.sendStatus(200);
     });
   },
@@ -32,7 +32,7 @@ const routes = {
     });
 
     req.on('end', function () {
-      let requestJSON = JSON.parse(jsonString);
+      let requestJSON = JSON.parse(requestData);
       let analyticsEventQuery = {
         v: 1,
         tid: 'UA-41256563-1',

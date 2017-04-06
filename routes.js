@@ -5,9 +5,21 @@ const routes = {
     console.log('Incoming Webhook Request');
     console.log(req);
     res.sendStatus(200);
+  },
+  pre: function (req, res) {
+    console.log('Incoming Pre Deploy Webhook Request');
+    console.log(req);
+    res.sendStatus(200);
+  },
+  post: function (req, res) {
+    console.log('Incoming Post Deploy Webhook Request');
+    console.log(req);
+    res.sendStatus(200);
   }
 };
 
 module.exports = {
-  index: routes.index
+  index: routes.index,
+  pre: routes.pre,
+  post: routes.post
 };

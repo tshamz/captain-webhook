@@ -32,6 +32,8 @@ router.all('*', function(req, res, next){
 
 // API routes
 router.post('/', routes.index);
+router.post('/pre', routes.pre);
+router.post('/post', routes.post);
 
 app.use(function(req, res, next){  // if route not found, respond with 404
   const jsonData = {

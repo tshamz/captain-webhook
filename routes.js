@@ -17,8 +17,8 @@ const routes = {
 
     req.on('end', function () {
        console.log(JSON.parse(jsonString));
+       console.log(req.body);
     });
-
     res.sendStatus(200);
   },
   post: function (req, res) {
@@ -32,6 +32,7 @@ const routes = {
 
     req.on('end', function () {
        console.log(JSON.parse(jsonString));
+       console.log(req.body);
     });
 
     res.sendStatus(200);

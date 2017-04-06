@@ -8,12 +8,12 @@ const routes = {
   },
   pre: function (req, res) {
     console.log('Incoming Pre Deploy Webhook Request');
-    console.log(req.body);
+    console.log(req);
     res.sendStatus(200);
   },
   post: function (req, res) {
     console.log('Incoming Post Deploy Webhook Request');
-    console.log(req.body);
+    console.log(req);
     res.sendStatus(200);
   }
 };

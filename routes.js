@@ -8,7 +8,6 @@ const routes = {
   },
   pre: function (req, res) {
     console.log('Incoming Pre Deploy Webhook Request');
-    // console.log(res);
 
     var jsonString = '';
 
@@ -23,7 +22,16 @@ const routes = {
   },
   post: function (req, res) {
     console.log('Incoming Post Deploy Webhook Request');
-    // console.log(req.query);
+
+    var jsonString = '';
+
+    req.on('data', function (data) {
+       jsonString += data;
+    });
+
+    req.on('end', function () {
+       console.log(JSON.parse(jsonString));
+    });
     res.sendStatus(200);
   }
 };

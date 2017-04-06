@@ -17,7 +17,7 @@ const routes = {
 
     req.on('end', function () {
       console.log(JSON.parse(jsonString));
-      res.sendStatus(200);
+      res.sendStatus(404);
     });
   },
   post: function (req, res) {

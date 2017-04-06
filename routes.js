@@ -2,7 +2,8 @@
 
 const routes = {
   index: function (req, res) {
-    console.log(req.body);
+    console.log('Incoming Webhook Request');
+    console.log(req);
     res.sendStatus(200);
   }
 };

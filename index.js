@@ -37,7 +37,7 @@ app.use(function(req, res, next){  // if route not found, respond with 404
     status: 'ERROR',
     message: 'Sorry, we cannot find the requested URI'
   };
-  res.status(404).send(jsonData);  // set status as 404 and respond with data
+  res.status(404).json(jsonData);  // set status as 404 and respond with data
 });
 
 const createExpressServer = function () {

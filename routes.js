@@ -1,8 +1,12 @@
 'use strict';
 
 const request = require('request');
-const UsageStats = require('usage-stats')
-const querystring = require('querystring');
+const UsageStats = require('usage-stats');
+
+const googleAnalyticsUAs = {
+  "https://bvaccel.git.beanstalkapp.com/boll-branch.git": "UA-41256563-1",
+  "https://bvaccel.git.beanstalkapp.com/staging-gpen.git": "UA-32939967-1"
+};
 
 const routes = {
   index: function (req, res) {
@@ -12,32 +16,24 @@ const routes = {
   },
   pre: function (req, res) {
     console.log('Incoming Pre Deploy Webhook Request');
-
-    var requestData = '';
-
+    let requestData = '';
     req.on('data', function (data) {
       requestData += data;
     });
-
     req.on('end', function () {
       console.log(JSON.parse(requestData));
       res.sendStatus(200);
     });
   },
   post: function (req, res) {
-    console.log('Incoming Post Deploy Webhook Request');
-
-    const usageStats = new UsageStats('UA-41256563-1', {
-      an: 'beanstalk-deployments'
-    });
-
     let requestData = '';
     req.on('data', function (data) {
       requestData += data;
     });
-
     req.on('end', function () {
       let requestJSON = JSON.parse(requestData);
+      const UA = googleAnalyticsUAs[requestJSON.repository_url_https];
+      const usageStats = new UsageStats(UA);
       usageStats.event('development', 'deployment', {el: requestJSON.comment})
       usageStats.send();
       res.sendStatus(200);

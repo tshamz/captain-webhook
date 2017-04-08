@@ -46,7 +46,7 @@ module.exports = function (req, res) {
           "color": (testPassed) ? "#5cb85c" : "#d9534f",
           "title": test.title,
           "author_name": test.file,
-          "fields": test.results.pop().map(function (result) {
+          "fields": test.results.map(function (result) {
             return {
               "title": result.slice(5, str.length),
               "value": result.slice(0, 4),

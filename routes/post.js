@@ -19,9 +19,9 @@ module.exports = function (req, res) {
     let cmd = `casperjs test tests/casper.js --site=${sites[data.repository].url}`;
     exec(cmd, function(error, stdout, stderr) {
       console.log(stdout);
-      console.log(sites[data.repository].slackWebhook);
       request({
         url: sites[data.repository].slackWebhook,
+        method: 'POST',
         json: true,
         body: {"text":"Hello, World!"}
       }, function (err, response, body) {

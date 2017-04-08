@@ -23,7 +23,7 @@ module.exports = function (req, res) {
       console.log(stdout);
       let cleanedInput = stripAnsi(stdout);
       let parsedInput = cleanedInput.split('\n');
-      console.log(parsedInput);
+      // console.log(parsedInput);
 
       request({
         url: sites[data.repository].slackWebhook,

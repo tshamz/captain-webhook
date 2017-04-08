@@ -1,6 +1,7 @@
 'use strict';
 
 const request = require('request');
+const stripAnsi = require('strip-ansi');
 const exec = require('child_process').exec;
 
 const sites = require('../sites/sites.js');
@@ -23,7 +24,7 @@ module.exports = function (req, res) {
         url: sites[data.repository].slackWebhook,
         method: 'POST',
         json: true,
-        body: {"text": stdout}
+        body: {"text": stripAnsi(stdout)}
       });
       res.sendStatus(200);
     });

@@ -11,7 +11,6 @@ module.exports = function (req, res) {
 
   req.on('end', function () {
     let data = JSON.parse(requestData);
-    console.log(data);
     res.sendStatus(200);
   });
 };

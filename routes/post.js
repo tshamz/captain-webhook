@@ -52,7 +52,7 @@ module.exports = function (req, res) {
               "value": result.slice(0, 4),
               "short": false
             };
-          });
+          })
         }
       });
 

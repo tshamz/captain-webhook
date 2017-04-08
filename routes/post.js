@@ -56,8 +56,6 @@ module.exports = function (req, res) {
         }
       });
 
-      console.log(testsData);
-
       request({
         url: sites[data.repository].slackWebhook,
         method: 'POST',
@@ -67,7 +65,12 @@ module.exports = function (req, res) {
           "attachments": testsData
         }
       });
-      res.sendStatus(200);
+
+      if (results.slice(0, 4) === 'FAIL') {
+        res.sendStatus(400);
+      } else {
+        res.sendStatus(200);
+      }
     });
   });
 };

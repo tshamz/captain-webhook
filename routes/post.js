@@ -18,7 +18,7 @@ module.exports = function (req, res) {
   req.on('end', function () {
     let data = JSON.parse(requestData);
     let site = sites[data.repository];
-    let cmd = `casperjs test tests/casper.js --site=${site.url}?preview_theme_id=${site.testingThemeId} --xunit=log.xml`;
+    let cmd = `casperjs test tests/casper.js --site=${site.url}?preview_theme_id=${site.testingThemeId}`;
     exec(cmd, function(error, stdout, stderr) {
       console.log(stdout);
       let cleanedInput = stripAnsi(stdout);

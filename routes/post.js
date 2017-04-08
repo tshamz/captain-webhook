@@ -18,7 +18,7 @@ module.exports = function (req, res) {
   req.on('end', function () {
     let data = JSON.parse(requestData);
     let site = sites[data.repository];
-    let cmd = `casperjs test tests/casper.js --site=${site.url}?preview_theme_id=${site.testingThemeId}`;
+    let cmd = `casperjs test tests/casper.js --site=${site.url}?preview_theme_id=${site.testingThemeId} --xunit=log.xml`;
     exec(cmd, function(error, stdout, stderr) {
       console.log(stdout);
       let cleanedInput = stripAnsi(stdout);
@@ -42,8 +42,7 @@ module.exports = function (req, res) {
 //             "fallback": "Required plain-text summary of the attachment.",
 //             "color": "#36a64f",
 //             "pretext": "Optional text that appears above the attachment block",
-//             "title": "Slack API Documentation",
-//             "title_link": "https://api.slack.com/",
+//             "title": "# Clicking on cart icon takes you to the cart page",
 //             "text": "Optional text that appears within the attachment",
 //             "fields": [
 //                 {
@@ -51,16 +50,28 @@ module.exports = function (req, res) {
 //                     "value": "Pass",
 //                     "short": false
 //                 }
-//             ],
-//             "image_url": "http://my-website.com/path/to/image.jpg",
-//             "thumb_url": "http://example.com/path/to/thumb.png",
-//             "footer": "Slack API",
-//             "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png",
-//             "ts": 123456789
+//             ]
 //         }
 //     ]
 // }
 
+// {
+//   "text": "*# Clicking on cart icon takes you to the cart page*",
+//     "attachments": [
+//         {
+//             "fallback": "Required plain-text summary of the attachment.",
+//             "color": "#36a64f",
+//             "title": "Cart icon exists",
+//             "text": "PASS"
+//         },
+//     {
+//             "fallback": "Required plain-text summary of the attachment.",
+//             "color": "#36a64f",
+//             "title": "Navigates to /cart page",
+//             "text": "PASS"
+//         }
+//     ]
+// }
 
 
 

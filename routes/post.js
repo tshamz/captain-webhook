@@ -1,6 +1,6 @@
 'use strict';
 
-const spawn = require('child_process').spawn;
+const spawn = require('child_process').spawnSync;
 
 const sites = require('../sites/sites.js');
 
@@ -16,10 +16,11 @@ module.exports = function (req, res) {
   req.on('end', function () {
     let data = JSON.parse(requestData);
     console.log(data);
-    res.status(200);
     let child = spawn('casperjs', ['test', 'tests/casper.js', `--site=${sites[data.repository].url}`]);
 
-    child.stdout.pipe(process.stdout);
-    child.stderr.pipe(process.stderr);
+    console.log(child.stdout.toString());
+    console.log(child.stderr.toString());
+
+    res.status(200);
   });
 }

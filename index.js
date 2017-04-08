@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 
 const app = express();
 const router = express.Router();
-const routes = require('./routes.js')
+const routes = require('./routes.js');
 const preDeployment = require('./routes/pre.js');
 const postDeployment = require('./routes/post.js');
 
@@ -30,8 +30,8 @@ router.all('*', function(req, res, next){
 });
 
 // API routes
-router.post('/pre', routes.pre);
-router.post('/post', routes.post);
+router.post('/pre', preDeployment);
+router.post('/post', postDeployment);
 
 app.use(function(req, res, next){  // if route not found, respond with 404
   const jsonData = {

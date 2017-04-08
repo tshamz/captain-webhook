@@ -17,19 +17,7 @@ module.exports = function (req, res) {
     let data = JSON.parse(requestData);
     console.log(data);
 
-    exec('pwd', function (error, stdout, stderr) {
-      console.log(error);
-      console.log(stdout);
-      console.log(stderr);
-    });
-
-    exec('ls -a', function (error, stdout, stderr) {
-      console.log(error);
-      console.log(stdout);
-      console.log(stderr);
-    });
-
-    exec(`casperjs test ../tests/casper.js --site=${sites[data.repository].url}`, function (error, stdout, stderr) {
+    exec(`casperjs test tests/casper.js --site=${sites[data.repository].url}`, function (error, stdout, stderr) {
       res.status(200);
       console.log(error);
       console.log(stdout);

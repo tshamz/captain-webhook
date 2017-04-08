@@ -26,7 +26,7 @@ module.exports = function (req, res) {
       let tests = parsedInput.match(/Test file(.|\n)*?tests\)/gm);
       let results = parsedInput.match(/.*skipped\./gm)[0];
 
-      let testData = tests.map(function (test) {
+      let testsData = tests.map(function (test) {
         return test.split('\n').reduce(function (testInfo, line, index) {
           if (index === 0) {
             testInfo.file = line;

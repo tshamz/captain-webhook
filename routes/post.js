@@ -16,11 +16,10 @@ module.exports = function (req, res) {
   req.on('end', function () {
     let data = JSON.parse(requestData);
     console.log(data);
-    let child = spawn('casperjs', ['test', 'tests/casper.js', `--site=${sites[data.repository].url}`]);
-
-    console.log(child.stdout.toString());
-    console.log(child.stderr.toString());
-
     res.status(200);
+    // let child = spawn('casperjs', ['test', 'tests/casper.js', `--site=${sites[data.repository].url}`]);
+
+    // console.log(child.stdout.toString());
+    // console.log(child.stderr.toString());
   });
 }

@@ -17,7 +17,7 @@ module.exports = function (req, res) {
     let data = JSON.parse(requestData);
     console.log(data);
 
-    exec(`casperjs test ./tests/casper.js ${sites[data.repository].url}`, function (error, stdout, stderr) {
+    exec(`casperjs test ./tests/casper.js --site=${sites[data.repository].url}`, function (error, stdout, stderr) {
       console.log(error);
       console.log(stdout);
       console.log(stderr);

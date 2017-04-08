@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 
 const app = express();
 const router = express.Router();
-const routes = require('./routes.js');
+
 const preDeployment = require('./routes/pre.js');
 const postDeployment = require('./routes/post.js');
 

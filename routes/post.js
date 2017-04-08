@@ -16,14 +16,26 @@ module.exports = function (req, res) {
   req.on('end', function () {
     let data = JSON.parse(requestData);
     console.log(data);
-    console.log(sites[data.repository].url);
 
-    exec(`casperjs test ../tests/casper.js --site=${sites[data.repository].url}`, function (error, stdout, stderr) {
+    exec('pwd', function (error, stdout, stderr) {
       console.log(error);
       console.log(stdout);
       console.log(stderr);
     });
 
-    res.status(200);
+    exec('ls -a', function (error, stdout, stderr) {
+      console.log(error);
+      console.log(stdout);
+      console.log(stderr);
+    });
+
+    exec(`casperjs test ../tests/casper.js --site=${sites[data.repository].url}`, function (error, stdout, stderr) {
+      res.status(200);
+      console.log(error);
+      console.log(stdout);
+      console.log(stderr);
+    });
+
+
   });
 }

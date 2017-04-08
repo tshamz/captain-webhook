@@ -48,7 +48,7 @@ module.exports = function (req, res) {
           "author_name": test.file,
           "fields": test.results.map(function (result) {
             return {
-              "title": result.slice(5, str.length),
+              "title": result.slice(5, result.length),
               "value": result.slice(0, 4),
               "short": false
             };

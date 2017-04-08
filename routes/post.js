@@ -39,7 +39,8 @@ module.exports = function (req, res) {
           }
           return testInfo;
         }, {pass:[], fail:[]});
-      })
+      });
+
 
       console.log(results);
       console.log(testsData);

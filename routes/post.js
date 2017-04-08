@@ -17,7 +17,7 @@ module.exports = function (req, res) {
     let data = JSON.parse(requestData);
     console.log(data);
 
-    let child = spawn('casperjs', ['test' 'tests/casper.js' `--site=${sites[data.repository].url}`]);
+    let child = spawn('casperjs', ['test', 'tests/casper.js', `--site=${sites[data.repository].url}`]);
 
     child.stdout.pipe(process.stdout);
     child.stderr.pipe(process.stderr);

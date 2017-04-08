@@ -21,15 +21,15 @@ module.exports = function (req, res) {
     let cmd = `casperjs test tests/casper.js --site=${site.url}?preview_theme_id=${site.testingThemeId}`;
     exec(cmd, function(error, stdout, stderr) {
       console.log(stdout);
-
-      let parsedOutput = stdout.split('\n');
-      console.log(parsedOutput);
+      let cleanedInput = stripAnsi(stdout);
+      let parsedInput = cleanedInput.split('\n');
+      console.log(parsedInput);
 
       request({
         url: sites[data.repository].slackWebhook,
         method: 'POST',
         json: true,
-        body: {"text": stripAnsi(stdout)}
+        body: {"text": cleanedInput}
       });
       res.sendStatus(200);
     });

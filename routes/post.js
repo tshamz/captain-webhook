@@ -23,9 +23,7 @@ module.exports = function (req, res) {
         url: sites[data.repository].slackWebhook,
         method: 'POST',
         json: true,
-        body: {"text":"Hello, World!"}
-      }, function (err, response, body) {
-        console.log(body);
+        body: {"text": stdout}
       });
       res.sendStatus(200);
     });

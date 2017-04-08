@@ -26,8 +26,23 @@ module.exports = function (req, res) {
       let tests = parsedInput.match(/Test file(.|\n)*?tests\)/gm);
       let results = parsedInput.match(/.*skipped\./gm)[0];
 
+      testData = tests.map(function (test) {
+        return test.split('\n').reduce(function (testInfo, line, index) {
+          if (index === 0) {
+            testInfo.file = line;
+          } else if (index === 1) {
+            testInfo.title = line;
+          } else if (line.slice(0, 4) === 'PASS') {
+            testInfo.pass.push(line);
+          } else if (line.slice(0, 4) === 'FAIL') {
+            testInfo.fail.push(line);
+          }
+          return testInfo;
+        }, {pass:[], fail:[]});
+      })
+
       console.log(results);
-      console.log(tests);
+      console.log(testsData);
 
       request({
         url: sites[data.repository].slackWebhook,

@@ -32,66 +32,45 @@ module.exports = function (req, res) {
             testInfo.file = line;
           } else if (index === 1) {
             testInfo.title = line;
-          } else if (line.slice(0, 4) === 'PASS') {
-            testInfo.pass.push(line);
-          } else if (line.slice(0, 4) === 'FAIL') {
-            testInfo.fail.push(line);
+          } else if (line.slice(0, 4) === 'PASS' || line.slice(0, 4) === 'FAIL') {
+            testInfo.results.push(line);
           }
           return testInfo;
-        }, {pass:[], fail:[]});
+        }, {results: []});
+      }).map(function (test) {
+        let testPassed = test.results.every(function (result) {
+          return result.indexOf('PASS') !== -1
+        });
+        return {
+          "fallback": test.title,
+          "color": (testPassed) ? "#5cb85c" : "#d9534f",
+          "title": test.title,
+          "author_name": test.file,
+          "fields": test.results.pop().map(function (result) {
+            return {
+              "title": result.slice(5, str.length),
+              "value": result.slice(0, 4),
+              "short": false
+            };
+          });
+        }
       });
 
-
-      console.log(results);
       console.log(testsData);
 
       request({
         url: sites[data.repository].slackWebhook,
         method: 'POST',
         json: true,
-        body: {"text": cleanedInput}
+        body: {
+          "text": `*${results}*`,
+          "attachments": testsData
+        }
       });
       res.sendStatus(200);
     });
   });
 };
-
-// {
-//     "attachments": [
-//         {
-//             "fallback": "Required plain-text summary of the attachment.",
-//             "color": "#36a64f",
-//             "pretext": "Optional text that appears above the attachment block",
-//             "title": "# Clicking on cart icon takes you to the cart page",
-//             "text": "Optional text that appears within the attachment",
-//             "fields": [
-//                 {
-//                     "title": "Clicking on cart icon takes you to the cart page",
-//                     "value": "Pass",
-//                     "short": false
-//                 }
-//             ]
-//         }
-//     ]
-// }
-
-// {
-//   "text": "*# Clicking on cart icon takes you to the cart page*",
-//     "attachments": [
-//         {
-//             "fallback": "Required plain-text summary of the attachment.",
-//             "color": "#36a64f",
-//             "title": "Cart icon exists",
-//             "text": "PASS"
-//         },
-//     {
-//             "fallback": "Required plain-text summary of the attachment.",
-//             "color": "#36a64f",
-//             "title": "Navigates to /cart page",
-//             "text": "PASS"
-//         }
-//     ]
-// }
 
 
 

@@ -22,8 +22,12 @@ module.exports = function (req, res) {
     exec(cmd, function(error, stdout, stderr) {
       console.log(stdout);
       let cleanedInput = stripAnsi(stdout);
-      let parsedInput = cleanedInput.split('\n');
-      // console.log(parsedInput);
+      let parsedInput = cleanedInput.match(/(.|\n)*skipped./gm)[0];
+      let tests = parsedInput.match(/Test file(.|\n)*?tests\)/gm);
+      let results = parsedInput.match(/.*skipped\./gm)[0];
+
+      console.log(results);
+      console.log(tests);
 
       request({
         url: sites[data.repository].slackWebhook,

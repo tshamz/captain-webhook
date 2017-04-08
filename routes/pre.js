@@ -14,5 +14,5 @@ module.exports = function (req, res) {
     console.log(data);
   });
 
-  res.status(200);
+  res.sendStatus(200);
 };

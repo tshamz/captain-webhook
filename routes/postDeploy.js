@@ -16,20 +16,15 @@ module.exports = {
     });
 
     req.on('end', function () {
-      let requestJSON = JSON.parse(requestData);
-
-      if (sites.hasOwnProperty(requestJSON.repository)) {
-        let site = sites[requestJSON.repository];
-
-        if (site.hasOwnProperty(googleAnalyticsUA)) {
-          let usageStats = new UsageStats(site.googleAnalyticsUA);
-
-          usageStats.event('development', 'deployment', {el: requestJSON.comment})
-          usageStats.send();
-        }
-      }
-
       res.sendStatus(200);
+      let requestJSON = JSON.parse(requestData);
+      let site = sites[requestJSON.repository];
+
+      if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA')) {
+        let usageStats = new UsageStats(site.googleAnalyticsUA);
+        usageStats.event('development', 'deployment', {el: requestJSON.comment});
+        usageStats.send();
+      }
     });
   }
 };

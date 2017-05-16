@@ -21,6 +21,7 @@ module.exports = {
       let site = sites[requestJSON.repository];
 
       if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA')) {
+        console.log(`Annotation for ${site.repo} made.`)
         let usageStats = new UsageStats(site.googleAnalyticsUA);
         usageStats.event('development', 'deployment', {el: requestJSON.comment});
         usageStats.send();

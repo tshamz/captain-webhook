@@ -25,3 +25,11 @@ const runTests = function (repo) {
 module.exports = {
   run: runTests
 };
+
+// req.on('end', function () {
+//   let data = JSON.parse(requestData);
+//   console.log(data);
+
+//   casperTests.run(data.repository);
+//   res.status(200);
+// });

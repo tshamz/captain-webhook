@@ -3,12 +3,14 @@
 const Q = require('q');
 const http = require('http');
 const express = require('express');
+const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
 const app = express();
 const router = express.Router();
-const preDeployment = require('./routes/pre.js');
-const postDeployment = require('./routes/post.js');
+const index = require('./routes/index.js');
+const preDeploy = require('./routes/preDeploy.js');
+const postDeploy = require('./routes/postDeploy.js');
 
 app.set('port', process.env.PORT || 5000);
 
@@ -29,8 +31,10 @@ router.all('*', function(req, res, next){
 });
 
 // API routes
-router.post('/pre', preDeployment);
-router.post('/post', postDeployment);
+router.get('/', index.get);
+router.post('/', index.post);
+router.post('/pre', preDeploy.post);
+router.post('/post', postDeploy.post);
 
 app.use(function(req, res, next){  // if route not found, respond with 404
   const jsonData = {

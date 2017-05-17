@@ -21,7 +21,7 @@ module.exports = {
       let requestJSON = JSON.parse(requestData);
       let site = sites[requestJSON.repository];
 
-      if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA')) {
+      if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.indexOf('[no annotate]') === -1) {
         let now = moment().format('MM-DD-YYYY HH:mm:ss');
         let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
         let usageStats = new UsageStats(site.googleAnalyticsUA);
@@ -29,7 +29,7 @@ module.exports = {
         usageStats.event('development', 'deployment', {el: message});
         usageStats.send();
 
-        console.log(`Annotation for ${site.repo} made - ${message}`);
+        console.log(`Annotation for ${site.repo} made by ${requestJSON.author} - ${message}`);
       }
     });
   }

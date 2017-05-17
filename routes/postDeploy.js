@@ -23,7 +23,7 @@ module.exports = {
 
       if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA')) {
         let now = moment().format('MM-DD-YYYY HH:mm:ss');
-        let message = `${requestJSON.comment} (${requestJSON.author} - ${now})`;
+        let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
         let usageStats = new UsageStats(site.googleAnalyticsUA);
 
         usageStats.event('development', 'deployment', {el: message});

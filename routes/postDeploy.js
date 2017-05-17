@@ -1,6 +1,7 @@
 'use strict';
 
-const request = require('request');
+const moment     = require('moment');
+const request    = require('request');
 const UsageStats = require('usage-stats');
 
 const sites = require('../sites/sites.js');
@@ -21,10 +22,14 @@ module.exports = {
       let site = sites[requestJSON.repository];
 
       if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA')) {
-        console.log(`Annotation for ${site.repo} made by ${requestJSON.author}`)
+        let now = moment().format('MM-DD-YYYY HH:mm:ss');
+        let message = `${requestJSON.comment} (${requestJSON.author} - ${now})`;
         let usageStats = new UsageStats(site.googleAnalyticsUA);
-        usageStats.event('development', 'deployment', {el: `${requestJSON.comment} (${requestJSON.author})`});
+
+        usageStats.event('development', 'deployment', {el: message});
         usageStats.send();
+
+        console.log(`Annotation for ${site.repo} made - ${message}`);
       }
     });
   }

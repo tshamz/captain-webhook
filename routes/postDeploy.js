@@ -18,10 +18,11 @@ module.exports = {
 
     req.on('end', function () {
       res.sendStatus(200);
+
       let requestJSON = JSON.parse(requestData);
       let site = sites[requestJSON.repository];
 
-      if (site !== undefined && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.indexOf('[no annotate]') === -1) {
+      if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) !== -1) {
         let now = moment().format('MM-DD-YYYY HH:mm:ss');
         let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
         let usageStats = new UsageStats(site.googleAnalyticsUA);

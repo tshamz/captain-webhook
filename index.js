@@ -35,8 +35,8 @@ router.all('*', function(req, res, next){
 // API routes
 router.get('/', index.get);
 router.post('/', index.post);
-router.get('/sites', index.get);
-router.post('/sites', index.post);
+router.get('/sites', sites.get);
+router.post('/sites', sites.post);
 router.post('/pre', preDeploy.post);
 router.post('/post', postDeploy.post);
 

@@ -8,7 +8,7 @@ const get = function (req, res) {
 };
 
 const post = function (req, res) {
-  console.log('Incoming Post Request to /');
+  console.log('Incoming Post Request to /sites');
   res.sendStatus(200);
 };
 

@@ -36,6 +36,7 @@ router.all('*', function(req, res, next){
 router.get('/', index.get);
 router.post('/', index.post);
 router.get('/sites', sites.get);
+router.get('/sites/:site', sites.getWithParam);
 router.post('/sites', sites.post);
 router.post('/pre', preDeploy.post);
 router.post('/post', postDeploy.post);

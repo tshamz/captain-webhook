@@ -4,6 +4,7 @@ const sites = require('../sites/sites.js');
 
 const get = function (req, res) {
   console.log('Incoming Get Request to /sites');
+  console.log(req.hostname);
   res.json(sites);
 };
 

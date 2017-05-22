@@ -10,6 +10,7 @@ const app = express();
 const router = express.Router();
 
 const index = require('./routes/index.js');
+const sites = require('./routes/sites.js');
 const preDeploy = require('./routes/preDeploy.js');
 const postDeploy = require('./routes/postDeploy.js');
 
@@ -34,6 +35,8 @@ router.all('*', function(req, res, next){
 // API routes
 router.get('/', index.get);
 router.post('/', index.post);
+router.get('/sites', index.get);
+router.post('/sites', index.post);
 router.post('/pre', preDeploy.post);
 router.post('/post', postDeploy.post);
 

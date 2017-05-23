@@ -22,7 +22,7 @@ module.exports = {
       let requestJSON = JSON.parse(requestData);
       let site = sites[requestJSON.repository];
 
-      if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) !== -1) {
+      if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) === -1) {
         let now = moment().format('MM-DD-YYYY HH:mm:ss');
         let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
         let usageStats = new UsageStats(site.googleAnalyticsUA);

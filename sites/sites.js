@@ -17,6 +17,7 @@ const ivoryella          = require('./data/ivoryella.js');
 const kenanddana         = require('./data/kenanddana.js');
 const kopari             = require('./data/kopari.js');
 const legacybox          = require('./data/legacybox.js');
+const linksoul           = require('./data/linksoul.js');
 const mizzenandmain      = require('./data/mizzenandmain.js');
 const mvmt               = require('./data/mvmt.js');
 const redbull            = require('./data/redbull.js');
@@ -25,6 +26,7 @@ const rideonewheel       = require('./data/rideonewheel.js');
 const roomify            = require('./data/roomify.js');
 const seismicaudio       = require('./data/seismicaudio.js');
 const stantt             = require('./data/stantt.js');
+const tecovasboots       = require('./data/tecovasboots.js');
 const testingworkflow    = require('./data/testing-workflow.js');
 const thegivingkeys      = require('./data/thegivingkeys.js');
 const tonyrobbins        = require('./data/tonyrobbins.js');
@@ -53,6 +55,7 @@ module.exports = {
   'ken-and-dana-design': kenanddana,
   'kopari': kopari,
   'legacy-box': legacybox,
+  'linksoul': linksoul,
   'mizzen-main': mizzenandmain,
   'mvmt-new': mvmt,
   'staging-redbull': redbull,
@@ -61,6 +64,7 @@ module.exports = {
   'roomify': roomify,
   'seismic-audio': seismicaudio,
   'stantt': stantt,
+  'tecovas-boots': tecovasboots,
   'testing-workflow': testingworkflow,
   'the-giving-keys': thegivingkeys,
   'tony-robbins': tonyrobbins,

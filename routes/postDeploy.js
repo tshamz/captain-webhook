@@ -21,7 +21,7 @@ module.exports = {
 
       let requestJSON = JSON.parse(requestData);
 
-      console.log(requestJSON);
+      console.log(requestJSON.branch);
 
       let site = sites[requestJSON.repository];
 

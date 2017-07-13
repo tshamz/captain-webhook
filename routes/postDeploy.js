@@ -20,6 +20,9 @@ module.exports = {
       res.sendStatus(200);
 
       let requestJSON = JSON.parse(requestData);
+
+      console.log(requestJSON);
+
       let site = sites[requestJSON.repository];
 
       if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) === -1) {

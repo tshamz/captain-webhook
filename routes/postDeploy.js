@@ -23,17 +23,19 @@ module.exports = {
 
       console.log(requestJSON.branch);
 
-      let site = sites[requestJSON.repository];
+      if (requestJSON.branch.toLowerCase().indexOf('production') !== -1) {
+        let site = sites[requestJSON.repository];
 
-      if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) === -1) {
-        let now = moment().format('MM-DD-YYYY HH:mm:ss');
-        let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
-        let usageStats = new UsageStats(site.googleAnalyticsUA);
+        if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) === -1) {
+          let now = moment().format('MM-DD-YYYY HH:mm:ss');
+          let message = `${requestJSON.comment} (time: ${now}, revision: ${requestJSON.revision})`;
+          let usageStats = new UsageStats(site.googleAnalyticsUA);
 
-        usageStats.event('development', 'deployment', {el: message});
-        usageStats.send();
+          usageStats.event('development', 'deployment', {el: message});
+          usageStats.send();
 
-        console.log(`Annotation for ${site.repo} made by ${requestJSON.author} - ${message}`);
+          console.log(`Annotation for ${site.repo} made by ${requestJSON.author} - ${message}`);
+        }
       }
     });
   }

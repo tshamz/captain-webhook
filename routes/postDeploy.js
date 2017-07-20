@@ -21,9 +21,9 @@ module.exports = {
 
       let requestJSON = JSON.parse(requestData);
 
-      console.log(requestJSON.branch);
+      console.log(requestJSON);
 
-      if (requestJSON.branch.toLowerCase().indexOf('production') !== -1) {
+      // if (requestJSON.branch.toLowerCase().indexOf('production') !== -1) {
         let site = sites[requestJSON.repository];
 
         if (site && site.hasOwnProperty('googleAnalyticsUA') && requestJSON.comment.search(/\[no[-| ]annotate\]/g) === -1) {
@@ -36,7 +36,7 @@ module.exports = {
 
           console.log(`Annotation for ${site.repo} made by ${requestJSON.author} - ${message}`);
         }
-      }
+      // }
     });
   }
 };
